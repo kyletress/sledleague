@@ -1,7 +1,15 @@
-<h1>Edit <%= @league.name %></h1>
-
+<div class="page-header">
+<h1>League Settings <small><%= @league.name %></small></h1>
+</div>
 <%= simple_form_for @league do |f| %>
 	<%= f.input :name %>
-	<%= f.button :submit %>
 	<%= f.hidden_field :manager_id, value: current_user.id %>
+	<strong>Races</strong>
+	<% Race.all.each do |race| %>
+		<div>
+      <%= check_box_tag "league[race_ids][]", race.id, @league.race_ids.include?(race.id) %>
+      <%= label_tag :race_ids, race.name -%>
+    </div>
+    <% end %>
+  <%= f.button :submit %>
 <% end %>
