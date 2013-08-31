@@ -1,0 +1,13 @@
+<h1>Athletes</h1>
+<table class="table table-striped table-bordered">
+	<tr>
+		<th>Athlete Name</th>
+	</tr>
+	<% @athletes.each do |athlete| %>
+	<tr>
+		<td><%= link_to athlete.name, athlete %></td>
+	</tr>
+	<% end %>
+</table>
+
+<%= link_to 'New Athlete', new_athlete_path %>

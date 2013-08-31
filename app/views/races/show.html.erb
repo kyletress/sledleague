@@ -1,1 +1,17 @@
 <h1><%= @race.name %></h1>
+
+<% unless @race.results.blank? %>
+	<h3>Results</h3>
+	<table class="table table-striped table-bordered">
+		<tr>
+			<th>Pos</th>
+			<th>Athlete</th>
+		</tr>
+		<% @race.results.each do |result| %>
+			<tr>
+				<th><%= result.position %></th>
+				<th><%= result.athlete.name %></th>
+			</tr>
+		<% end %>
+	</table>
+<% end %>

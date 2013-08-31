@@ -7,7 +7,11 @@ Sledleague::Application.routes.draw do
   		get 'leave'
   	end
   end
-  resources :races
+  resources :races do
+  	resources :results
+  end
+
+  resources :athletes
 
   get "pages/home"
   get "pages/about"

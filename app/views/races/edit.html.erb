@@ -1,2 +1,13 @@
-<h1>Races#edit</h1>
-<p>Find me in app/views/races/edit.html.erb</p>
+<h1><%= @race.name %></h1>
+
+<%= simple_form_for @race do |f| %>
+	<%= f.input :name %>
+	<h3>Results</h3>
+	<%= f.fields_for :results do |builder| %>
+		<%= builder.input :position, collection: 1..12 %>
+		<%= builder.association :athlete %>
+	<% end %>
+
+
+	<%= f.button :submit %>
+<% end %>
