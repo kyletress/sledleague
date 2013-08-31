@@ -1,2 +1,7 @@
-<h1>Leagues#edit</h1>
-<p>Find me in app/views/leagues/edit.html.erb</p>
+<h1>Edit <%= @league.name %></h1>
+
+<%= simple_form_for @league do |f| %>
+	<%= f.input :name %>
+	<%= f.button :submit %>
+	<%= f.hidden_field :manager_id, value: current_user.id %>
+<% end %>

@@ -1,2 +1,10 @@
-<h1>Leagues#show</h1>
-<p>Find me in app/views/leagues/show.html.erb</p>
+<h1><%= @league.name %></h1>
+<p>Manager: <%= @league.manager.email if @league.manager %></p>
+
+<h2>Teams</h2>
+<ul>
+	<% @league.memberships.each do |member| %>
+		<li><%= member.user.email %></li>
+	<% end %>
+</ul>
+
