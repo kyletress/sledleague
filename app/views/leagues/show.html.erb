@@ -1,10 +1,15 @@
 <h1><%= @league.name %></h1>
-<p>Manager: <%= @league.manager.email if @league.manager %></p>
 
-<h2>Teams</h2>
-<ul>
-	<% @league.memberships.each do |member| %>
-		<li><%= member.user.email %></li>
-	<% end %>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#league" data-toggle="tab">League</a></li>
+  <li><a href="#team" data-toggle="tab">My Team</a></li>
+  <li><a href="#rules" data-toggle="tab">Rules</a></li>
+  <li><a href="#standings" data-toggle="tab">Standings</a></li>
+  <li class="dropdown">
+   	<a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+            <li><a href="#dropdown1" tabindex="-1" data-toggle="tab">@fat</a></li>
+            <li><a href="#dropdown2" tabindex="-1" data-toggle="tab">@mdo</a></li>
+          </ul>
+        </li>
 </ul>
-
