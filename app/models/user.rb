@@ -11,4 +11,12 @@ class User < ActiveRecord::Base
 
   has_many :memberships
   has_many :leagues, through: :memberships
+
+  def is_member(league)
+    if self.memberships.find_by_league_id(league.id)
+      return true
+    else
+      return false
+    end
+  end
 end

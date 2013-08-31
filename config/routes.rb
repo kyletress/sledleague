@@ -1,7 +1,12 @@
 Sledleague::Application.routes.draw do
 
   devise_for :users
-  resources :leagues
+  resources :leagues do
+  	member do
+  		get 'join'
+  		get 'leave'
+  	end
+  end
   resources :races
 
   get "pages/home"

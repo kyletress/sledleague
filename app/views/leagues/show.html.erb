@@ -8,8 +8,10 @@
   <li class="dropdown">
    	<a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-      <li><a href="#dropdown1" tabindex="-1" data-toggle="tab">@fat</a></li>
-      <li><a href="#dropdown2" tabindex="-1" data-toggle="tab">@mdo</a></li>
+      <% @league.memberships.each do |member| %>
+        <li><%= member.user.email %></li>
+        <!--<a href="#dropdown1" tabindex="-1" data-toggle="tab">@fat</a>-->
+      <% end %>
     </ul>
   </li>
   <li><a href="#settings" data-toggle="tab">Settings</a></li>
@@ -22,3 +24,22 @@
   <li><%= link_to match.race.name, match.race %></li>
 <% end %>
 </ul>
+
+<h4>Teams in this league</h4>
+<ul>
+  <% @league.memberships.each do |member| %>
+    <li><%= member.user.email %></li>
+  <% end %>
+</ul>
+
+<% unless @league.private %>
+  <% if current_user.is_member(@league) %>
+    <%= link_to 'Leave League', leave_league_path(@league), class: 'btn btn-default' %>
+  <% else %>
+   <%= link_to 'Join League', join_league_path(@league), class: 'btn btn-default' %>
+  <% end %>
+<% end %>
+
+
+
+
