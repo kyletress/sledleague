@@ -1,9 +1,15 @@
-<h1>New Predictions</h1>
-<p>Predictions are just a parent model for children picks</p>
+<h1>New Prediction</h1>
 
 <%= simple_form_for @prediction do |f| %>
 	<%= f.hidden_field :match_id %>
+	<h3>Picks</h3>
+	<ol>
+	<%= f.simple_fields_for :picks do |ff| %>
+	<li>
+		<%=  ff.hidden_field :position %>
+		<%= ff.association :athlete %>
+	</li>
+	<% end %>
+</ol>
 	<%= f.button :submit %>
 <% end %>
-
-<% # how to validate that a user can make predictions for a certain match? %>

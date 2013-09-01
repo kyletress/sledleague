@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
       return false
     end
   end
+
+  def has_prediction?(match)
+    self && self.predictions.find_by_match_id(match.id)
+  end
 end

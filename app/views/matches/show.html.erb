@@ -23,7 +23,22 @@
 		</table>
 	</div>
 	<div class="tab-pane fade" id="myPredictions">
-		<%= link_to "Make Predictions", new_prediction_path(:match_id => @match.id ) %>
+		<% if @prediction %>
+			<table class="table table-bordered table-striped">
+				<tr>
+					<th>Pos.</th>
+					<th>Athlete</th>
+				</tr>
+				<% @prediction.picks.each do |pick| %>
+					<tr>
+						<td><%= pick.position %></td>
+						<td><%= pick.athlete.name %></td>
+					</tr>
+				<% end %>
+			</table>
+		<% else %>
+			<%= link_to "Make Predictions", new_prediction_path(:match_id => @match.id ) %>
+		<% end %>
 	</div>
 	<div class="tab-pane fade" id="leaguePredictions">
 		<p>League Predictions</p>
