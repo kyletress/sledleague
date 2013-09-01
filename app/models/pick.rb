@@ -8,7 +8,7 @@ class Pick < ActiveRecord::Base
 
   validate :ensure_unique_athlete_per_prediction
 
-   def ensure_unique_athlete_per_prediction
-      errors.add(:athlete_id, "Already chosen") if @duplicate_athlete_ids.present? and @duplicate_athlete_ids.include?(athlete_id)
-    end
+  def ensure_unique_athlete_per_prediction
+  	errors.add(:athlete_id, "Already chosen") if @duplicate_athlete_ids.present? and @duplicate_athlete_ids.include?(athlete_id)
+	end
 end

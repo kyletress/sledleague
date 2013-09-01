@@ -44,3 +44,9 @@
 		<p>League Predictions</p>
 	</div>
 </div>
+
+<h3>Points</h3>
+<p>Here we go...</p>
+<% if current_user && current_user.has_prediction?(@match) %>
+	<%= current_user.email %> points = <%= current_user.points(@match) %>
+<% end %>

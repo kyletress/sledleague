@@ -23,4 +23,23 @@ class User < ActiveRecord::Base
   def has_prediction?(match)
     self && self.predictions.find_by_match_id(match.id)
   end
+
+  def points(match)
+    total = 0
+    prediction = self.predictions.find_by_match_id(match.id)
+    for pick in prediction.picks
+      x = (pick.athlete.result(match.race.id) - pick.position).abs
+      case x
+      when 0
+        total = total + 3
+      when 1
+        total = total + 2
+      when 2
+        total = total + 1
+      else
+        total = total + 0
+      end
+    end
+  return total
+  end
 end
