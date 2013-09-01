@@ -1,5 +1,7 @@
 Sledleague::Application.routes.draw do
 
+  get "memberships/new"
+
   devise_for :users
   resources :leagues do
   	member do
@@ -12,6 +14,9 @@ Sledleague::Application.routes.draw do
   end
 
   resources :athletes
+  resources :matches
+  resources :predictions
+  resources :memberships
 
   get "pages/home"
   get "pages/about"

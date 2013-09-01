@@ -21,7 +21,7 @@
 <h4>Races in this league</h4>
 <ul>
 <% @league.matches.each do |match| %>
-  <li><%= link_to match.race.name, match.race %></li>
+  <li><%= link_to match.race.name, match %></li>
 <% end %>
 </ul>
 

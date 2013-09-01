@@ -9,9 +9,10 @@
 		</tr>
 		<% @race.results.each do |result| %>
 			<tr>
-				<th><%= result.position %></th>
-				<th><%= result.athlete.name %></th>
+				<td><%= result.position %></td>
+				<td><%= link_to result.athlete.name, result.athlete %></td>
 			</tr>
 		<% end %>
 	</table>
 <% end %>
+
