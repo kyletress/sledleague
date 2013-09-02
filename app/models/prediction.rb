@@ -1,16 +1,16 @@
 class Prediction < ActiveRecord::Base
-  attr_accessible :match_id, :user_id, :picks_attributes, :athlete_id, :position
+  attr_accessible :match_id, :user_id, :picks_attributes
 
   belongs_to :match
   belongs_to :user
-  belongs_to :athlete
-  has_many :picks, dependent: :destroy
+  has_many :picks, dependent: :destroy #, inverse_of :prediction
 
   accepts_nested_attributes_for :picks
 
   validates_uniqueness_of :user_id, :scope => :match_id
-  validates :match_id, presence: true
+  validates :match_id, :user_id, presence: true
 
+  # Homemade validation to fix bug in rails uniqueness nested scope validation
 	before_validation do
     picks.map do |e|
       athlete_ids = picks.collect(&:athlete_id).compact
@@ -19,5 +19,11 @@ class Prediction < ActiveRecord::Base
       e.instance_variable_set "@duplicate_athlete_ids", duplicate_athlete_ids
     end
   end
+
+  # TODO
+  # Can edit predictions until 1 hour before the match begins.
+  # Then lock the prediction.
+  # Can't make predictions new predictions for completed race.
+  # Can only see predictions within my league
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130901213351) do
+ActiveRecord::Schema.define(:version => 20130902022923) do
 
   create_table "athletes", :force => true do |t|
     t.string   "name"
@@ -36,12 +36,18 @@ ActiveRecord::Schema.define(:version => 20130901213351) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "matches", ["league_id"], :name => "index_matches_on_league_id"
+  add_index "matches", ["race_id"], :name => "index_matches_on_race_id"
+
   create_table "memberships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "league_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "memberships", ["league_id"], :name => "index_memberships_on_league_id"
+  add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
 
   create_table "picks", :force => true do |t|
     t.integer  "prediction_id"
@@ -51,14 +57,17 @@ ActiveRecord::Schema.define(:version => 20130901213351) do
     t.datetime "updated_at",    :null => false
   end
 
+  add_index "picks", ["prediction_id"], :name => "index_picks_on_prediction_id"
+
   create_table "predictions", :force => true do |t|
     t.integer  "user_id"
     t.integer  "match_id"
-    t.integer  "athlete_id"
-    t.integer  "position"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "predictions", ["match_id"], :name => "index_predictions_on_match_id"
+  add_index "predictions", ["user_id"], :name => "index_predictions_on_user_id"
 
   create_table "races", :force => true do |t|
     t.string   "name"
@@ -74,6 +83,9 @@ ActiveRecord::Schema.define(:version => 20130901213351) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "results", ["athlete_id"], :name => "index_results_on_athlete_id"
+  add_index "results", ["race_id"], :name => "index_results_on_race_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

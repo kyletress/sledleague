@@ -3,6 +3,9 @@
 <ul class="nav nav-tabs">
 	<% if @match.race.results.present? %>
   	<li class="active"><a href="#results" data-toggle="tab">Results</a></li>
+  	<% if @match.predictions.present? %>
+  		<li><a href="#leagueStandings" data-toggle="tab">Points</a></li>
+  	<% end %>
   <% end %>
   	<li><a href="#myPredictions" data-toggle="tab">My Predictions</a></li>
   	<li><a href="#leaguePredictions" data-toggle="tab">League Predictions</a></li>
@@ -43,10 +46,20 @@
 	<div class="tab-pane fade" id="leaguePredictions">
 		<p>League Predictions</p>
 	</div>
+	<% if @match.predictions.present? && @match.race.results.present? %>
+		<div class="tab-pane fade" id="leagueStandings">
+			<table class="table table-striped table-bordered">
+				<tr>
+					<th>Team</th>
+					<th>Points after this race</th>
+				</tr>
+				<% @match.league.memberships.each do |team| %>
+					<tr>
+						<td><%= team.user.email %></td>
+						<td><%= team.user.points(@match) %></td>
+					</tr>
+				<% end %>
+			</table>
+		</div>
+	<% end %>
 </div>
-
-<h3>Points</h3>
-<p>Here we go...</p>
-<% if current_user && current_user.has_prediction?(@match) %>
-	<%= current_user.email %> points = <%= current_user.points(@match) %>
-<% end %>

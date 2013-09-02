@@ -1,5 +1,5 @@
 <div class="page-header">
-<h1>League Settings <small><%= @league.name %></small></h1>
+<h1>League Settings</h1>
 </div>
 <%= simple_form_for @league do |f| %>
 	<%= f.input :name %>
@@ -16,3 +16,7 @@
     <% end %>
   <%= f.button :submit %>
 <% end %>
+
+<%= link_to 'Destroy League', @league, :confirm => 'Are you sure you want to destroy this league?', :method => :delete %>
+
+<% # TODO - once race is completed, disable its checkbox %>

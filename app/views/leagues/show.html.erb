@@ -32,6 +32,9 @@
   <% end %>
 </ul>
 
+<h3>Standings</h3>
+<%= current_user.total_points(@league) %>
+
 <% unless @league.private %>
   <% if current_user.is_member(@league) %>
     <%= link_to 'Leave League', leave_league_path(@league), class: 'btn btn-default' %>

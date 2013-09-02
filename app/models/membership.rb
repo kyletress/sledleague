@@ -4,4 +4,9 @@ class Membership < ActiveRecord::Base
   belongs_to :league
 
   validates_uniqueness_of :user_id, :scope => :league_id
+
+  # Thinking of improving this model by adding a Team Name and
+  # Total Points. Then I can also mark a Champion field (BOOLEAN)
+  # The show page will act as a team page, visible to all other
+  # peeps in the league.
 end

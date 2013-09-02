@@ -3,5 +3,7 @@ class Match < ActiveRecord::Base
 
   belongs_to :league
   belongs_to :race
-  has_many :predictions
+  has_many :predictions, dependent: :destroy
+
+  validates :league_id, :race_id, presence: true
 end

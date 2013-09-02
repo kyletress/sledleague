@@ -37,13 +37,18 @@ class LeaguesController < ApplicationController
     end
   end
 
+  def destroy
+    @league = League.find(params[:id])
+    @league.destroy
+    redirect_to leagues_path
+  end
+
   def join
     @league = League.find(params[:id])
     if current_user.memberships.create(:league_id => @league.id)
       redirect_to @league
     else
-      flash[:alert] = "You are already in this league"
-      render @league
+      render @league, notice: 'You are already in this league'
     end
   end
 

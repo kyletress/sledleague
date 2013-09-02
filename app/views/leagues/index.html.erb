@@ -5,12 +5,14 @@
 	<tr>
 		<th>Name</th>
 		<th>Manager</th>
+		<th>Type</th>
 		<th>Join</th>
 	</tr>
 	<% @leagues.each do |league| %>
 	<tr>
 		<td><%= link_to league.name, league_path(league) %></td>
 		<td><%= league.manager.email if league.manager %></td>
+		<td><% if league.private? %>Private<% else %>Public<% end %></td>
 		<td><%= link_to 'Join', root_url %></td>
 	</tr>
 	<% end %>

@@ -16,9 +16,7 @@ class RacesController < ApplicationController
   def edit
   	@race = Race.find(params[:id])
     if @race.results.blank?
-      12.times do
-        result = @race.results.build
-      end
+      12.times {|n| @race.results.build(:position => n+1) }
     end
   end
 
