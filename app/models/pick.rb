@@ -5,7 +5,6 @@ class Pick < ActiveRecord::Base
 
   # validates_uniqueness_of :athlete_id, :scope => :prediction_id BUG IN RAILS
   validates :athlete_id, :position, presence: true
-  validates :prediction, presence: true
   validate :ensure_unique_athlete_per_prediction
 
   # Homemade validation to fix the rails uniqueness nested scope validation bug

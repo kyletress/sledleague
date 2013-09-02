@@ -1,5 +1,4 @@
 <h1>Leagues</h1>
-<p>There are <%= League.count %> available leagues</p>
 
 <table class="table table-bordered table-striped">
 	<tr>
@@ -9,13 +8,22 @@
 		<th>Join</th>
 	</tr>
 	<% @leagues.each do |league| %>
-	<tr>
-		<td><%= link_to league.name, league_path(league) %></td>
-		<td><%= league.manager.email if league.manager %></td>
-		<td><% if league.private? %>Private<% else %>Public<% end %></td>
-		<td><%= link_to 'Join', root_url %></td>
-	</tr>
+		<% if league.private? %>
+			<tr>
+				<td><span class="text-muted"><%= league.name %></span></td>
+				<td><span class="text-muted">Hidden</span></td>
+				<td><small><em class="text-muted">Private</em></td>
+				<td><%= link_to 'Join', join_league_path(league), class: 'btn btn-success btn-xs disabled' %></td>
+			</tr>
+		<% else %>
+			<tr>
+				<td><%= link_to league.name, league_path(league) %></td>
+				<td><%= league.manager.email if league.manager %></td>
+				<td>Public</td>
+				<td><%= link_to 'Join', join_league_path(league), class: 'btn btn-success btn-xs' %></td>
+			</tr>
+		<% end %>
 	<% end %>
 </table>
 
-<%= link_to 'New league', new_league_path %>
+<p>Don't see a league you like? <%= link_to 'Create your own', new_league_path %>.</p>

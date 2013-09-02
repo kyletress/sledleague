@@ -1,6 +1,8 @@
 class LeaguesController < ApplicationController
 
   before_filter :authenticate_user!, except: [:index]
+  before_filter :league_member, except: [:index, :new, :create]
+  before_filter :league_manager, only: [:edit, :update, :destroy]
 
   def index
   	@leagues = League.all
@@ -57,4 +59,18 @@ class LeaguesController < ApplicationController
     current_user.memberships.find_by_league_id(@league.id).destroy
     redirect_to @league
   end
+
+  private
+
+    def league_member
+      @league = League.find(params[:id])
+      if @league.private && @league.memberships.find_by_user_id(current_user.id).nil?
+        redirect_to(root_path) unless current_user == @league.manager
+      end
+    end
+
+    def league_manager
+      @league = League.find(params[:id])
+      redirect_to @league unless current_user == @league.manager
+    end
 end
