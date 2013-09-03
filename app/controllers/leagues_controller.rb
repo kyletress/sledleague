@@ -56,8 +56,12 @@ class LeaguesController < ApplicationController
 
   def leave
     @league = League.find(params[:id])
-    current_user.memberships.find_by_league_id(@league.id).destroy
-    redirect_to @league
+    if @league.manager == current_user
+      redirect_to @league, notice: 'Managers cannot leave their league'
+    else
+      current_user.memberships.find_by_league_id(@league.id).destroy
+      redirect_to leagues_path
+    end
   end
 
   def accept_invitation

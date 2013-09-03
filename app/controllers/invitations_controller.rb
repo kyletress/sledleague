@@ -2,6 +2,10 @@ class InvitationsController < ApplicationController
 
 	before_filter :load_league
 
+	def index
+		@invitations = @league.invitations.all
+	end
+
 	def new
 		@invitation = Invitation.new
 	end
@@ -11,21 +15,37 @@ class InvitationsController < ApplicationController
 		@invitation.sender = current_user
 		@invitation.league = @league
 		if @invitation.save
-			redirect_to leagues_url, notice: 'Successfully sent invitation'
+			InvitationMailer.invite(@invitation).deliver
+			redirect_to @league, notice: "Invitation sent. #{view_context.link_to('Send another?', new_league_invitation_path(@league))}".html_safe
 		else
 			render 'new'
 		end
 	end
 
+	def destroy
+		@invitation = Invitation.find(params[:id])
+		@invitation.destroy
+		redirect_to root_url, notice: 'You have declined the league invitation'
+	end
+
 	def accept
-		if current_user
-			@invitation = Invitation.find(params[:invitation_id])
-			unless @invitation.recipient_email == current_user.email && @invitation.token == params[:token]
+		@invitation = Invitation.find(params[:invitation_id])
+		@user = User.find_by_email(@invitation.recipient_email)
+		if @user # this person is registered
+			unless current_user && @invitation.recipient_email == current_user.email && @invitation.token == params[:token]
 				redirect_to root_path
 			end
-		else
-			redirect_to new_user_session_path
+		else # this user needs to register first
+			redirect_to new_user_registration_path, notice: 'Please register with the email address on your invitation before proceeding'
 		end
+		#if current_user
+		#	@invitation = Invitation.find(params[:invitation_id])
+		#	unless @invitation.recipient_email == current_user.email && @invitation.token == params[:token]
+		#		redirect_to root_path
+		#	end
+		#else
+		#	redirect_to new_user_session_path
+		#end
 	end
 
 	private

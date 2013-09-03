@@ -1,4 +1,5 @@
 <h1><%= @league.name %></h1>
+<p>League Manager: <%= @league.manager.email %></p>
 
 <% if current_manager %>
  <%= link_to 'Invite Friends', new_league_invitation_path(@league), class: 'btn btn-default' %>
@@ -39,12 +40,14 @@
 <h3>Standings</h3>
 <%= current_user.total_points(@league) %>
 
-<% unless @league.private %>
   <% if current_user.is_member(@league) %>
     <%= link_to 'Leave League', leave_league_path(@league), class: 'btn btn-default' %>
   <% else %>
    <%= link_to 'Join League', join_league_path(@league), class: 'btn btn-default' %>
   <% end %>
+
+<% if current_manager %>
+  <%= link_to 'League Settings', edit_league_path(@league) %>
 <% end %>
 
 

@@ -10,8 +10,8 @@
 	<% @leagues.each do |league| %>
 		<% if league.private? %>
 			<tr>
-				<% if current_user.is_manager(league) || current_user.is_member(league) %>
-					<td><%= link_to league.name, league %></td>
+				<% if current_user && current_user.is_member(league) %>
+					<td><span class="text-muted"><%= link_to league.name, league %></span></td>
 				<% else %>
 					<td><span class="text-muted"><%= league.name %></span></td>
 				<% end %>

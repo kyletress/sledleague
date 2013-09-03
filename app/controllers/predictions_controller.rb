@@ -33,7 +33,8 @@ class PredictionsController < ApplicationController
   end
 
   private
-  	def load_user
+
+    def load_user
   		@user = current_user
   	end
 

@@ -1,17 +1,14 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :leagues, through: :memberships
-  has_many :predictions
-  has_many :invitations
+  has_many :predictions, dependent: :destroy
+  # has_many :invitations, dependent: :nullify # just set the user_id to null
 
   def is_member(league)
     if self.memberships.find_by_league_id(league.id)

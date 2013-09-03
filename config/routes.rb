@@ -1,8 +1,5 @@
 Sledleague::Application.routes.draw do
 
-  get "memberships/new"
-
-
   devise_for :users
 
   resources :leagues do
@@ -11,9 +8,10 @@ Sledleague::Application.routes.draw do
   		get 'leave'
   	end
     resources :invitations do
-      get 'accept/:token' => 'invitations#accept'
+      get 'accept/:token' => 'invitations#accept', :as => :accept
     end
   end
+
   resources :races do
   	resources :results
   end
