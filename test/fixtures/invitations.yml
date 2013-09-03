@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sender_id: 1
+  league_id: 1
+  token: MyString
+  sent_at: 2013-09-02 03:05:36
+
+two:
+  sender_id: 1
+  league_id: 1
+  token: MyString
+  sent_at: 2013-09-02 03:05:36

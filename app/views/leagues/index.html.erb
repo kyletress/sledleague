@@ -10,7 +10,11 @@
 	<% @leagues.each do |league| %>
 		<% if league.private? %>
 			<tr>
-				<td><span class="text-muted"><%= league.name %></span></td>
+				<% if current_user.is_manager(league) || current_user.is_member(league) %>
+					<td><%= link_to league.name, league %></td>
+				<% else %>
+					<td><span class="text-muted"><%= league.name %></span></td>
+				<% end %>
 				<td><span class="text-muted">Hidden</span></td>
 				<td><small><em class="text-muted">Private</em></td>
 				<td><%= link_to 'Join', join_league_path(league), class: 'btn btn-success btn-xs disabled' %></td>

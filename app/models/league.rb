@@ -7,6 +7,7 @@ class League < ActiveRecord::Base
   has_many :matches, dependent: :destroy
   has_many :races, through: :matches
   has_many :results, through: :races
+  has_many :invitations
 
   validates :manager_id, :name,
   					presence: true
@@ -16,4 +17,6 @@ class League < ActiveRecord::Base
 
   # TODO - Set a league roster to manage available athletes
   # TODO - Proper league settings model
+
+
 end

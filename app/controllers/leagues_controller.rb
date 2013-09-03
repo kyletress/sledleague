@@ -1,7 +1,7 @@
 class LeaguesController < ApplicationController
 
   before_filter :authenticate_user!, except: [:index]
-  before_filter :league_member, except: [:index, :new, :create]
+  before_filter :league_member, :except => [:index, :new, :create, :join]
   before_filter :league_manager, only: [:edit, :update, :destroy]
 
   def index
@@ -48,9 +48,9 @@ class LeaguesController < ApplicationController
   def join
     @league = League.find(params[:id])
     if current_user.memberships.create(:league_id => @league.id)
-      redirect_to @league
+      redirect_to @league, notice: 'Welcome to the league'
     else
-      render @league, notice: 'You are already in this league'
+      render @league, notice: 'You are already a member'
     end
   end
 
@@ -58,6 +58,12 @@ class LeaguesController < ApplicationController
     @league = League.find(params[:id])
     current_user.memberships.find_by_league_id(@league.id).destroy
     redirect_to @league
+  end
+
+  def accept_invitation
+    @league = League.find(params[:id])
+    current_user.memberships.create(:league_id => @league.id)
+    redirect_to @league, notice: 'Welcome to the league'
   end
 
   private

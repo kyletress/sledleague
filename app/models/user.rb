@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :leagues, through: :memberships
   has_many :predictions
+  has_many :invitations
 
   def is_member(league)
     if self.memberships.find_by_league_id(league.id)
@@ -18,6 +19,10 @@ class User < ActiveRecord::Base
     else
       return false
     end
+  end
+
+  def is_manager(league)
+    self == league.manager
   end
 
   def has_prediction?(match)

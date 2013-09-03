@@ -1,5 +1,9 @@
 <h1><%= @league.name %></h1>
 
+<% if current_manager %>
+ <%= link_to 'Invite Friends', new_league_invitation_path(@league), class: 'btn btn-default' %>
+<% end %>
+
 <ul class="nav nav-tabs">
   <li class="active"><a href="#league" data-toggle="tab">League</a></li>
   <li><a href="#team" data-toggle="tab">My Team</a></li>

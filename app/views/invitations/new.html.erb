@@ -1,0 +1,5 @@
+<h1>Invite a friend</h1>
+<%= simple_form_for [@league, @invitation] do |f| %>
+	<%= f.input :recipient_email %>
+	<%= f.button :submit %>
+<% end %>

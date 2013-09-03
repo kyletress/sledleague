@@ -1,0 +1,11 @@
+<% if @invitation.recipient_email == current_user.email %>
+
+<h1>Join this league?</h1>
+<%= @league.manager.email %> has invited you to join the <%= @league.name %> league.
+<div>
+<p>
+<%= link_to 'Join League', join_league_path(@league), class: 'btn btn-success' %> or
+<%= link_to 'Decline', leagues_path, class: 'btn btn-default' %>
+</p>
+</div>
+<% end %>
