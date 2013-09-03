@@ -1,8 +1,7 @@
 class PredictionsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :load_user
-  before_filter :league_member
-
+  # TODO - Only league members can make or see predictions
   def new
   	@match = Match.find(params[:match_id])
   	if @user.is_member(@match.league)
@@ -37,10 +36,4 @@ class PredictionsController < ApplicationController
     def load_user
   		@user = current_user
   	end
-
-    def league_member
-      @prediction = Prediction.find(params[:id])
-      @league = @prediction.match.league
-      redirect_to(root_path) if @league.memberships.find_by_user_id(current_user.id).nil?
-    end
 end
