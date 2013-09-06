@@ -1,6 +1,7 @@
-<% if @invitation.recipient_email == current_user.email %>
-	<% if @invitation.recipient_registered? %>
-		<h1>Invitation</h1>
+<% if current_user && @invitation.recipient_email == current_user.email %>
+<%# if @invitation.recipient_email == current_user.email %>
+	<% #if @invitation.recipient_registered? %>
+		<h1>Join the league</h1>
 			<%= @league.manager.email %> has invited you to join the <%= @league.name %> league.
 			<div>
 				<p>
@@ -10,6 +11,31 @@
 			</div>
 	<% else %>
 		<h1>Join the League</h1>
-		<p>Before you can accept this invitation, you have to finish registration</p>
-	<% end %>
+		<p class="text text-danger">Oops! It looks like you aren't a member yet. Register below to join the league.</p>
+		<h2>Sign up</h2>
+
+		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {class: 'form-horizontal'}) do |f| %>
+  		<%= devise_error_messages! %>
+
+		<div class="form-group">
+    <label class="col-lg-2 control-label">Email</label>
+    <div class="col-lg-10"><p class="form-control-static"><%= @invitation.recipient_email %></p></div>
+  	</div>
+
+  	<%= f.hidden_field :email, :value => @invitation.recipient_email %>
+
+  <div class="form-group">
+  	<%= f.label :password , class: 'col-lg-2 control-label' %>
+  	<div class="col-lg-10"><%= f.password_field :password, class: 'form-control' %></div>
+	</div>
+
+  <div class="form-group">
+  	<%= f.label :password_confirmation, class: 'col-lg-2 control-label' %>
+  	<div class="col-lg-10"><%= f.password_field :password_confirmation, class: 'form-control'%></div>
+	</div>
+
+  <div><%= f.submit "Sign up" %></div>
+		<% end %>
+
+		<%= render "devise/shared/links" %>
 <% end %>

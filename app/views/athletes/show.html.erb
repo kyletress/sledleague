@@ -1,1 +1,14 @@
 <h1><%= @athlete.name %></h1>
+<h3>Results</h3>
+<table class="table table-striped table-bordered">
+	<tr>
+		<th>Race</th>
+		<th>Pos.</th>
+	</tr>
+	<% @athlete.results.each do |result| %>
+	<tr>
+		<td><%= link_to result.race.name, result.race %></td>
+		<td><%= result.position %></td>
+	</tr>
+	<% end %>
+</table>

@@ -12,4 +12,8 @@
 	<% end %>
 </table>
 
-<p>Races are largely administrative. Admins will be able to see them to input results. League managers will see them to choose which races they will contend for in the league. The rest of the UI will revolve around showing Matches instead</p>
+<% if current_user && current_user.admin? %>
+<p><%= link_to 'New Race', new_race_path, class: 'btn btn-default' %></p>
+<% end %>
+
+<p>Races are for admins to enter results, and for league managers to select which matches will count in their leagues. The rest of the UI will revolve around Matches instead</p>

@@ -6,7 +6,8 @@ class PredictionsController < ApplicationController
   	@match = Match.find(params[:match_id])
   	if @user.is_member(@match.league)
   		@prediction = @user.predictions.build(:match_id => @match.id)
-  		10.times {|n| @prediction.picks.build(:position => n+1) }
+      # @prediction = @membership.predictions.build(:match_id => @match.id)
+  		10.times {|n| @prediction.picks.build(:position => n + 1) }
   		#do @prediction.picks.build
   		#end
   	else

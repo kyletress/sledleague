@@ -1,0 +1,8 @@
+<h1><%= @membership.team_name %></h1>
+<p class="lead">League: <%= link_to @membership.league.name, @membership.league %> &bull;
+Owner: <%= @membership.user.email %>
+</p>
+
+<%= link_to 'Team settings', edit_membership_path(@membership) %> or
+
+<%= link_to 'Leave this league', leave_league_path(@membership.league), class: 'btn btn-danger' %>

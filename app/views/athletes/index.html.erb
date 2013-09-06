@@ -10,4 +10,6 @@
 	<% end %>
 </table>
 
-<%= link_to 'New Athlete', new_athlete_path %>
+<% if current_user && current_user.admin? %>
+	<p><%= link_to 'New Athlete', new_athlete_path, class: 'btn btn-default' %></p>
+<% end %>

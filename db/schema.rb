@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130902070536) do
+ActiveRecord::Schema.define(:version => 20130905035023) do
 
   create_table "athletes", :force => true do |t|
     t.string   "name"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20130902070536) do
     t.integer  "league_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "team"
   end
 
   add_index "memberships", ["league_id"], :name => "index_memberships_on_league_id"
@@ -72,8 +73,9 @@ ActiveRecord::Schema.define(:version => 20130902070536) do
   create_table "predictions", :force => true do |t|
     t.integer  "user_id"
     t.integer  "match_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "membership_id"
   end
 
   add_index "predictions", ["match_id"], :name => "index_predictions_on_match_id"
@@ -98,8 +100,8 @@ ActiveRecord::Schema.define(:version => 20130902070536) do
   add_index "results", ["race_id"], :name => "index_results_on_race_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -108,8 +110,9 @@ ActiveRecord::Schema.define(:version => 20130902070536) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.boolean  "admin",                  :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

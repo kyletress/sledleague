@@ -1,54 +1,60 @@
-<h1><%= @league.name %></h1>
-<p>League Manager: <%= @league.manager.email %></p>
+<div class="page-header">
+  <h1><%= @league.name %> <% if @league.private? %><small><em>private</em></small><% end %></h1>
+</div>
 
-<% if current_manager %>
- <%= link_to 'Invite Friends', new_league_invitation_path(@league), class: 'btn btn-default' %>
-<% end %>
-
-<ul class="nav nav-tabs">
+<ul class="nav nav-pills">
   <li class="active"><a href="#league" data-toggle="tab">League</a></li>
   <li><a href="#team" data-toggle="tab">My Team</a></li>
   <li><a href="#rules" data-toggle="tab">Rules</a></li>
   <li><a href="#standings" data-toggle="tab">Standings</a></li>
-  <li class="dropdown">
-   	<a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-      <% @league.memberships.each do |member| %>
-        <li><%= member.user.email %></li>
-        <!--<a href="#dropdown1" tabindex="-1" data-toggle="tab">@fat</a>-->
-      <% end %>
-    </ul>
-  </li>
-  <li><a href="#settings" data-toggle="tab">Settings</a></li>
-</ul>
-
-<h3>Settings</h3>
-<h4>Races in this league</h4>
-<ul>
-<% @league.matches.each do |match| %>
-  <li><%= link_to match.race.name, match %></li>
-<% end %>
-</ul>
-
-<h4>Teams in this league</h4>
-<ul>
-  <% @league.memberships.each do |member| %>
-    <li><%= member.user.email %></li>
+  <% if current_manager %>
+    <li><%= link_to 'Settings', edit_league_path(@league) %></li>
+    <li><%= link_to 'Invite Friends', new_league_invitation_path(@league) %></li>
   <% end %>
 </ul>
 
-<h3>Standings</h3>
-<%= current_user.total_points(@league) %>
+  <h3>Standings</h3>
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th>Position</th>
+      <th>Team</th>
+      <th>Points</th>
+    </tr>
+    <% @league.memberships.each_with_index do |team, position| %>
+      <tr>
+        <td><%= position+1 %></td>
+        <td>
+          <%= link_to team.team_name, team %>
+          <% if team.user.is_manager(@league) %>
+          <small><span class="text-muted">(manager)</span></small>
+          <% end %>
+        </td>
+        <td><%= team.total_points %></td>
+      </tr>
+    <% end %>
+  </table>
 
-  <% if current_user.is_member(@league) %>
-    <%= link_to 'Leave League', leave_league_path(@league), class: 'btn btn-default' %>
-  <% else %>
-   <%= link_to 'Join League', join_league_path(@league), class: 'btn btn-default' %>
+  <h3>Schedule</h3>
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th>Race</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+    <% @league.matches.each do |match| %>
+    <tr>
+      <td><%= link_to match.race.name, match %></td>
+      <td><%= match.race.startdate %></td>
+      <td><%= link_to "Make Predictions", new_prediction_path(:match_id => match.id ) %></td>
+    </tr>
+    <% end %>
+  </table>
+
+<% # current_user.total_points(@league) %>
+
+  <% if !current_user.is_member(@league) %>
+   <%= link_to 'Join League', join_league_path(@league), class: 'btn btn-success' %>
   <% end %>
-
-<% if current_manager %>
-  <%= link_to 'League Settings', edit_league_path(@league) %>
-<% end %>
 
 
 

@@ -3,6 +3,7 @@ class Prediction < ActiveRecord::Base
 
   belongs_to :match
   belongs_to :user
+  belongs_to :membership
   has_many :picks, dependent: :destroy
 
   accepts_nested_attributes_for :picks

@@ -36,7 +36,7 @@ class InvitationsController < ApplicationController
 				redirect_to root_path
 			end
 		else # this user needs to register first
-			redirect_to new_user_registration_path, notice: 'Please register with the email address on your invitation before proceeding'
+			#redirect_to new_user_registration_path, notice: 'Please register with the email address on your invitation before proceeding'
 		end
 		#if current_user
 		#	@invitation = Invitation.find(params[:invitation_id])

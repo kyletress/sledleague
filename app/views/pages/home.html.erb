@@ -1,2 +1,39 @@
-<h1>Sled League</h1>
-<p>The fantasy sliding site</p>
+<div class="row">
+
+<h1>Fantasy Sliding</h1>
+
+<p>Fantasy Sliding is a prediction-based fantasy league for bobsled, skeleton, and luge. Pick your sport, join or create a league, and get started picking your top ten finishers for the actual FIBT World Cup season. It's free to join and free to play.</p>
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+		<h3>Some Leagues</h3>
+		<table class="table table-striped table-bordered table-condensed">
+			<tr>
+				<th>Name</th>
+				<th>Openings</th>
+			</tr>
+		</table>
+		<p><%= link_to 'View more leagues', leagues_path %></p>
+	</div>
+	<div class="col-md-4">
+		<h3>Some Athletes</h3>
+		<table class="table table-striped table-bordered table-condensed">
+			<tr>
+				<th>Name</th>
+				<th>Country</th>
+			</tr>
+		</table>
+		<p><%= link_to 'See all athletes', athletes_path %></p>
+	</div>
+	<div class="col-md-4">
+		<h3>Some Races</h3>
+			<table class="table table-striped table-bordered table-condensed">
+			<tr>
+				<th>Name</th>
+				<th>Date</th>
+			</tr>
+		</table>
+		<p><%= link_to 'See upcoming races', races_path %></p>
+	</div>
+</div><!--end row-->

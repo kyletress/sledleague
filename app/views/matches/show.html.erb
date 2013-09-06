@@ -1,6 +1,6 @@
-<h1><%= @match.race.name %></h1>
+<h1><%= @match.race.name %> <small>&mdash; <%= @match.league.name %></small></h1>
 
-<ul class="nav nav-tabs">
+<ul class="nav nav-pills">
 	<% if @match.race.results.present? %>
   	<li class="active"><a href="#results" data-toggle="tab">Results</a></li>
   	<% if @match.predictions.present? %>
@@ -40,7 +40,7 @@
 				<% end %>
 			</table>
 		<% else %>
-			<%= link_to "Make Predictions", new_prediction_path(:match_id => @match.id ) %>
+			<% link_to "Make Predictions", new_prediction_path(:match_id => @match.id ) %>
 		<% end %>
 	</div>
 	<div class="tab-pane fade" id="leaguePredictions">
