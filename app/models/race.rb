@@ -1,5 +1,5 @@
 class Race < ActiveRecord::Base
-  attr_accessible :name, :startdate, :results_attributes
+  attr_accessible :name, :startdate, :completed, :results_attributes
 
   has_many :matches, dependent: :destroy
   has_many :leagues, through: :matches

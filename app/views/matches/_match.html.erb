@@ -1,0 +1,11 @@
+<tr>
+	<td><%= link_to match.race.name, match %></td>
+	<td><%= match.race.startdate %></td>
+	<% if match.race.completed? %>
+		<td><%= link_to 'Show Results', match.race %></td>
+	<% elsif current_user.has_prediction?(match) %>
+		<td><%= link_to 'Show Predictions', match_prediction_path(match, current_user.predictions.find_by_match_id(match.id)) %></td>
+	<% else %>
+		<td><%= link_to "Make Predictions", new_match_prediction_path(match) %></td>
+	<% end %>
+</tr>

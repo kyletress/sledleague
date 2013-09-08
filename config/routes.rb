@@ -17,8 +17,9 @@ Sledleague::Application.routes.draw do
   end
 
   resources :athletes
-  resources :matches
-  resources :predictions
+  resources :matches do
+    resources :predictions
+  end
   resources :memberships
 
   get "pages/home"

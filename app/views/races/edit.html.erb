@@ -2,6 +2,7 @@
 
 <%= simple_form_for @race do |f| %>
 	<%= f.input :name %>
+	<%= f.input :completed %>
 	<h3>Results</h3>
 	<%= f.fields_for :results do |builder| %>
 		<%= builder.input :position, collection: 1..12 %>

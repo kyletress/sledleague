@@ -20,18 +20,7 @@
       <th>Team</th>
       <th>Points</th>
     </tr>
-    <% @league.memberships.each_with_index do |team, position| %>
-      <tr>
-        <td><%= position+1 %></td>
-        <td>
-          <%= link_to team.team_name, team %>
-          <% if team.user.is_manager(@league) %>
-          <small><span class="text-muted">(manager)</span></small>
-          <% end %>
-        </td>
-        <td><%= team.total_points %></td>
-      </tr>
-    <% end %>
+    <%= render @league.memberships %>
   </table>
 
   <h3>Schedule</h3>
@@ -41,13 +30,7 @@
       <th>Date</th>
       <th>Actions</th>
     </tr>
-    <% @league.matches.each do |match| %>
-    <tr>
-      <td><%= link_to match.race.name, match %></td>
-      <td><%= match.race.startdate %></td>
-      <td><%= link_to "Make Predictions", new_prediction_path(:match_id => match.id ) %></td>
-    </tr>
-    <% end %>
+    <%= render @league.matches %>
   </table>
 
 <% # current_user.total_points(@league) %>

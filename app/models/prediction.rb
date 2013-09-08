@@ -10,6 +10,7 @@ class Prediction < ActiveRecord::Base
 
   validates_uniqueness_of :user_id, :scope => :match_id
   validates :match_id, :user_id, presence: true
+  # before_create :race_not_completed
 
   # Homemade validation to fix bug in rails uniqueness nested scope validation
 	before_validation do

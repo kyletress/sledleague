@@ -3,11 +3,7 @@
 	<tr>
 		<th>Athlete Name</th>
 	</tr>
-	<% @athletes.each do |athlete| %>
-	<tr>
-		<td><%= link_to athlete.name, athlete %></td>
-	</tr>
-	<% end %>
+	<%= render @athletes %>
 </table>
 
 <% if current_user && current_user.admin? %>

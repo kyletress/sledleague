@@ -1,3 +1,7 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
 <h1>Leagues</h1>
 
 <table class="table table-bordered table-striped">
@@ -7,27 +11,7 @@
 		<th>Type</th>
 		<th>Join</th>
 	</tr>
-	<% @leagues.each do |league| %>
-		<% if league.private? %>
-			<tr>
-				<% if current_user && current_user.is_member(league) %>
-					<td><span class="text-muted"><%= link_to league.name, league %></span></td>
-				<% else %>
-					<td><span class="text-muted"><%= league.name %></span></td>
-				<% end %>
-				<td><span class="text-muted">Hidden</span></td>
-				<td><small><em class="text-muted">Private</em></td>
-				<td><%= link_to 'Join', join_league_path(league), class: 'btn btn-success btn-xs disabled' %></td>
-			</tr>
-		<% else %>
-			<tr>
-				<td><%= link_to league.name, league_path(league) %></td>
-				<td><%= league.manager.email if league.manager %></td>
-				<td>Public</td>
-				<td><%= link_to 'Join', join_league_path(league), class: 'btn btn-success btn-xs' %></td>
-			</tr>
-		<% end %>
-	<% end %>
+	<%= render @leagues %>
 </table>
 
 <p>Don't see a league you like? <%= link_to 'Create your own', new_league_path %>.</p>

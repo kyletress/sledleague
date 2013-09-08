@@ -4,12 +4,7 @@
 		<th>Name</th>
 		<th>Start Date</th>
 	</tr>
-	<% @races.each do |race| %>
-	<tr>
-		<td><%= link_to race.name, race %></td>
-		<td><%= race.startdate.strftime('%x')%></td>
-	</tr>
-	<% end %>
+<%= render @races %>
 </table>
 
 <% if current_user && current_user.admin? %>

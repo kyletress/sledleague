@@ -7,12 +7,5 @@
 		<th>Status</th>
 		<th>Actions</th>
 	</tr>
-	<% @invitations.each do |invitation| %>
-	<tr>
-		<td><%= invitation.recipient_email %></td>
-		<td><%= invitation.sent_at %></td>
-		<td><span class="text text-success">accepted</span></td>
-		<td><a href="#">resend</a></td>
-	</tr>
-	<% end %>
+	<%= render @invitations %>
 </table>
