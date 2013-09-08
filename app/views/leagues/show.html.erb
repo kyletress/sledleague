@@ -1,6 +1,8 @@
 <div class="page-header">
-  <h1><%= @league.name %> <% if @league.private? %><small><em>private</em></small><% end %></h1>
+  <h1><%= @league.name %></h1>
 </div>
+
+<% if current_user.is_member(@league) %>
 
 <ul class="nav nav-pills">
   <li class="active"><a href="#league" data-toggle="tab">League</a></li>
@@ -36,9 +38,28 @@
 <% # current_user.total_points(@league) %>
 
   <% if !current_user.is_member(@league) %>
-   <%= link_to 'Join League', join_league_path(@league), class: 'btn btn-success' %>
   <% end %>
 
+<% else %>
+  <% link_to 'Join this league', join_league_path(@league), class: 'btn btn-success' %>
+  <%= button_to 'Join this league', memberships_path(league_id: @league.id), class: 'btn btn-success' %>
+
+  <h3>Teams</h3>
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th>Pos.</th>
+      <th>Name</th>
+      <th>Pts.</th>
+    </tr>
+    <%= render @league.memberships %>
+  </table>
+  <h4>Schedule (<%= @league.matches.count %> matches)</h4>
+  <ol>
+    <% @league.matches.each do |match| %>
+      <li><%= match.race.name %> <small class="text-muted"><%= l match.race.startdate, format: :long %></small></li>
+    <% end %>
+  </ol>
+<% end %>
 
 
 

@@ -16,3 +16,7 @@
 	</table>
 <% end %>
 
+<% if current_user && current_user.admin? %>
+	<%= link_to 'Edit Race', edit_race_path(@race) %>
+<% end %>
+

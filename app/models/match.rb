@@ -6,4 +6,13 @@ class Match < ActiveRecord::Base
   has_many :predictions, dependent: :destroy
 
   validates :league_id, :race_id, presence: true
+
+  def predictions_closed
+  	cutoff = race.startdate - 1.hour
+  	if Time.now >= cutoff
+  		return true
+  	else
+  		return false
+  	end
+  end
 end

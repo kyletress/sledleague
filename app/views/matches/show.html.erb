@@ -70,3 +70,12 @@
 		</div>
 	<% end %>
 </div>
+
+<%= Time.now %> and <%= @match.race.startdate %>
+
+<% if @match.predictions_closed %>
+	Predictions Closed!
+<% else %>
+ Predictions Open!
+<% end %>
+

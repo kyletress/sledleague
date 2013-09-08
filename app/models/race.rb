@@ -4,7 +4,7 @@ class Race < ActiveRecord::Base
   has_many :matches, dependent: :destroy
   has_many :leagues, through: :matches
   has_many :results, dependent: :destroy
-  accepts_nested_attributes_for :results
+  accepts_nested_attributes_for :results, :reject_if => lambda { |a| a[:athlete_id].blank? }
 
   validates :name, presence: true
 end

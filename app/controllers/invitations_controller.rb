@@ -35,17 +35,8 @@ class InvitationsController < ApplicationController
 			unless current_user && @invitation.recipient_email == current_user.email && @invitation.token == params[:token]
 				redirect_to root_path
 			end
-		else # this user needs to register first
-			#redirect_to new_user_registration_path, notice: 'Please register with the email address on your invitation before proceeding'
+		else
 		end
-		#if current_user
-		#	@invitation = Invitation.find(params[:invitation_id])
-		#	unless @invitation.recipient_email == current_user.email && @invitation.token == params[:token]
-		#		redirect_to root_path
-		#	end
-		#else
-		#	redirect_to new_user_session_path
-		#end
 	end
 
 	private

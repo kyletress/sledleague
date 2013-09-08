@@ -4,7 +4,6 @@ class MembershipsController < ApplicationController
   before_filter :correct_user, only: [:edit, :update]
 
   def new
-    # Probably don't need this unless I want Team Name
   end
 
   def show
@@ -22,7 +21,14 @@ class MembershipsController < ApplicationController
   end
 
   def create
-    # Join league
+    @user = current_user
+    @league = League.find(params[:league_id])
+    @membership = @user.memberships.build(:league_id => @league.id)
+    if @membership.save
+      redirect_to @league, notice: 'Welcome! You have joined the league'
+    else
+      render @league, notice: 'Something went wrong'
+    end
   end
 
   def destroy

@@ -5,7 +5,7 @@
 		<% else %>
 			<td><span class="text-muted"><%= league.name %></span></td>
 		<% end %>
-		<td><span class="text-muted">Hidden</span></td>
+		<td><small><em class="text-muted">Private</em></small></td>
 		<td><small><em class="text-muted">Private</em></td>
 		<td><%= link_to 'Join', join_league_path(league), class: 'btn btn-success btn-xs disabled' %></td>
 	</tr>
@@ -15,7 +15,7 @@
 		<td><%= league.manager.email if league.manager %></td>
 		<td>Public</td>
 		<td><%= link_to 'Join', join_league_path(league), class: 'btn btn-success btn-xs' %>
-			<%= button_to 'Join', new_membership_path(league: league), method: 'get', class: 'btn btn-success btn-xs' %></td>
+			<% button_to 'Join', new_membership_path(league: league), method: 'get', class: 'btn btn-success btn-xs' %></td>
 	</tr>
 <% end %>
 
