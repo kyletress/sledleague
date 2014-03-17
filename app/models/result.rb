@@ -4,4 +4,5 @@ class Result < ActiveRecord::Base
   belongs_to :athlete
 
   validates :athlete_id, :race_id, :position, presence: true
+
 end

@@ -1,6 +1,7 @@
 class AthletesController < ApplicationController
 	def index
-		@athletes = Athlete.all
+		@athletes = Athlete.search(params[:search]).order
+		@random_athlete = Athlete.offset(rand(Athlete.count)).first
 	end
 
 	def new

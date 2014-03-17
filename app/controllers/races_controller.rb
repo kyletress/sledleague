@@ -1,6 +1,7 @@
 class RacesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
 
+
   def index
   	@races = Race.all
   end

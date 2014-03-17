@@ -1,31 +1,48 @@
 <div class="page-header">
-  <h1><%= @league.name %></h1>
+  <h1>
+    <%= @league.name %> League
+  </h1>
+  <% if @league.private? %>
+    <span class="label label-success">Private</span>
+  <% end %>
 </div>
 
 <% if current_user.is_member(@league) %>
 
 <ul class="nav nav-pills">
-  <li class="active"><a href="#league" data-toggle="tab">League</a></li>
+  <li class="active"><a href="#league" data-toggle="tab">League Home</a></li>
   <li><a href="#team" data-toggle="tab">My Team</a></li>
-  <li><a href="#rules" data-toggle="tab">Rules</a></li>
-  <li><a href="#standings" data-toggle="tab">Standings</a></li>
+  <li><a href="#rules" data-toggle="tab">League Rules</a></li>
   <% if current_manager %>
     <li><%= link_to 'Settings', edit_league_path(@league) %></li>
     <li><%= link_to 'Invite Friends', new_league_invitation_path(@league) %></li>
   <% end %>
 </ul>
 
-  <h3>Standings</h3>
-  <table class="table table-striped table-bordered">
-    <tr>
-      <th>Position</th>
-      <th>Team</th>
-      <th>Points</th>
-    </tr>
-    <%= render @league.memberships %>
-  </table>
-
-  <h3>Schedule</h3>
+<div class="row">
+  <div class="col-md-6">
+    <h3>Recent Activity</h3>
+    <ol>
+      <li>Tress Monsters made a prediction for the Calgary World Cup <br/><small>about an hour ago</small></li>
+      <li>Tress Monsters made a prediction for the Park City World Cup. <br/><small>about an hour ago</small></li>
+      <li>Tress Monsters made a prediction for the Whistler Intercontinental Cup. <br/><small>three days ago</small></li>
+      <li></li>
+      <li></li>
+    </ol>
+    <h4>League Chat</h4>
+  </div>
+  <div class="col-md-6">
+    <h4>Standings</h4>
+      <table class="table table-striped table-bordered">
+        <tr>
+          <th>Position</th>
+          <th>Team</th>
+          <th>Points</th>
+        </tr>
+        <%= render @league.memberships %>
+      </table>
+  <h4>Schedule</h4>
+  <p>The next race is the <a href="#">Lake Placid World Cup</a> in 5 days.</p>
   <table class="table table-striped table-bordered">
     <tr>
       <th>Race</th>
@@ -34,6 +51,9 @@
     </tr>
     <%= render @league.matches %>
   </table>
+  </div>
+</div>
+
 
 <% # current_user.total_points(@league) %>
 

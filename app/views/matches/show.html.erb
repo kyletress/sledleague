@@ -1,5 +1,12 @@
 <h1><%= @match.race.name %> <small>&mdash; <%= @match.league.name %></small></h1>
 
+
+<% if @match.predictions_closed && ! @match.race.completed %>
+	<div class="alert alert-danger">
+		Predictions are now closed for this race.
+	</div>
+<% end %>
+
 <ul class="nav nav-pills">
 	<% if @match.race.results.present? %>
   	<li class="active"><a href="#results" data-toggle="tab">Results</a></li>
@@ -31,11 +38,13 @@
 				<tr>
 					<th>Pos.</th>
 					<th>Athlete</th>
+					<th>Points Earned</th>
 				</tr>
 				<% @prediction.picks.each do |pick| %>
 					<tr>
 						<td><%= pick.position %></td>
 						<td><%= pick.athlete.name %></td>
+						<td><%= pick.points %></td>
 					</tr>
 				<% end %>
 			</table>
@@ -72,10 +81,4 @@
 </div>
 
 <%= Time.now %> and <%= @match.race.startdate %>
-
-<% if @match.predictions_closed %>
-	Predictions Closed!
-<% else %>
- Predictions Open!
-<% end %>
 

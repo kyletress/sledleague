@@ -3,6 +3,8 @@ class MembershipsController < ApplicationController
   before_filter :load_membership, except: [:create, :new]
   before_filter :correct_user, only: [:edit, :update]
 
+  # Index would essentially be the standings page.
+
   def new
   end
 

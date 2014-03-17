@@ -15,12 +15,8 @@ class Membership < ActiveRecord::Base
   # peeps in the league.
   # TODO - Bolster this model to include team name, team page, and total points
 
-  def total_points
-  	return 0
-  end
-
-  def points(match)
-  	return 0
+  def team_points
+  	self.predictions.sum(:total_points)
   end
 
   def team_name

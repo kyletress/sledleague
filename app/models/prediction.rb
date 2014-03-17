@@ -1,5 +1,5 @@
 class Prediction < ActiveRecord::Base
-  attr_accessible :match_id, :user_id, :picks_attributes
+  attr_accessible :match_id, :user_id, :picks_attributes, :total_points
 
   belongs_to :match
   belongs_to :user
@@ -22,10 +22,34 @@ class Prediction < ActiveRecord::Base
     end
   end
 
+  def calculate_points
+    score = 0 # full points
+    pick_score = 0 # breakdown points
+    picks.each do |pick|
+      x = (pick.athlete.result(pick.prediction.match.race.id) - pick.position).abs
+      case x
+      when 0
+        score = score + 3
+        pick_score = 3
+      when 1
+        score = score + 2
+        pick_score = 2
+      when 2
+        score = score + 1
+        pick_score = 1
+      else
+        score = score + 0
+        pick_score = 0
+      end
+      pick.update_attributes(:points => pick_score)
+    end
+    self.update_attributes(:total_points => score)
+  end
+
   # TODO
+  # URGENT - Predictions should belong to a member, not a user.
   # Can edit predictions until 1 hour before the match begins.
   # Then lock the prediction.
-  # Can't make predictions new predictions for completed race.
+  # Can't make new predictions for completed race.
   # Can only see predictions within my league
-
 end

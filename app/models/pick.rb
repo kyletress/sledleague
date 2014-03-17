@@ -1,5 +1,5 @@
 class Pick < ActiveRecord::Base
-  attr_accessible :athlete_id, :position, :prediction_id
+  attr_accessible :athlete_id, :position, :prediction_id, :points
   belongs_to :prediction
   belongs_to :athlete
 
@@ -11,4 +11,20 @@ class Pick < ActiveRecord::Base
   def ensure_unique_athlete_per_prediction
   	errors.add(:athlete_id, "Already chosen") if @duplicate_athlete_ids.present? and @duplicate_athlete_ids.include?(athlete_id)
 	end
+
+  def calculate_points(result)
+    score = 0
+    x = (result.position - self.position).abs
+    case x
+    when 0
+      score = 3
+    when 1
+      score = 2
+    when 2
+      score = 1
+    else
+      score = 0
+    end
+    self.update_attributes(:points => score)
+  end
 end
