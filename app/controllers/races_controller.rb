@@ -1,6 +1,6 @@
 class RacesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-
+  before_filter :admin_user, except: [:index, :show]
 
   def index
   	@races = Race.all
@@ -38,4 +38,10 @@ class RacesController < ApplicationController
       render 'edit'
     end
   end
+  
+  private
+  
+    def admin_user
+      redirect_to root_url, notice: 'Only admin users can do that' unless current_user && current_user.admin? # TODO show a 404 here instead
+    end
 end

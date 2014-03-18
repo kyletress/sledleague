@@ -8,7 +8,7 @@ class Match < ActiveRecord::Base
   validates :league_id, :race_id, presence: true
 
   def predictions_closed
-  	cutoff = race.startdate - 1.hour
+    cutoff = race.startdate - 1.hour # Hardcoded, but could easily be a league setting
   	if Time.now >= cutoff
   		return true
   	else

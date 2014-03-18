@@ -1,5 +1,7 @@
 class AthletesController < ApplicationController
-	def index
+  before_filter :admin_user, except: [:index, :show]
+  
+  def index
 		@athletes = Athlete.search(params[:search]).order
 		@random_athlete = Athlete.offset(rand(Athlete.count)).first
 	end
@@ -24,4 +26,10 @@ class AthletesController < ApplicationController
 			render 'new'
 		end
 	end
+  
+  private
+    
+    def admin_user
+      redirect_to root_url, notice: 'Only admin users can do that' unless current_user && current_user.admin? # TODO show a 404 here instead
+    end
 end

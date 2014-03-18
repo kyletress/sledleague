@@ -26,6 +26,7 @@ class Prediction < ActiveRecord::Base
     score = 0 # full points
     pick_score = 0 # breakdown points
     picks.each do |pick|
+      # BUG? - What if the predicted pick doesn't have a result? Need to account for this.
       x = (pick.athlete.result(pick.prediction.match.race.id) - pick.position).abs
       case x
       when 0

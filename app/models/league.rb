@@ -15,8 +15,8 @@ class League < ActiveRecord::Base
   validates :name, length: { in: 5..30 }
   validates :name, uniqueness: true
 
-  # TODO - Set a league roster to manage available athletes
   # TODO - Proper league settings model
+  # every league gets a default setting. 8 races, 8 teams, 1 hour cutoff. Scoring. Then you can tweak it
 
 
 end
