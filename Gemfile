@@ -4,6 +4,7 @@ gem 'rails', '3.2.14'
 gem 'thin'
 gem 'devise'
 gem 'simple_form'
+gem 'figaro'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

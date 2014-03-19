@@ -18,6 +18,7 @@ class RacesController < ApplicationController
   	@race = Race.find(params[:id])
     if @race.results.blank?
       12.times {|n| @race.results.build(:position => n+1) }
+      # TODO - Full results. Autocomplete text field. Ajax. 
     end
   end
 

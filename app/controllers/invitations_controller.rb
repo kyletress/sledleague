@@ -28,7 +28,7 @@ class InvitationsController < ApplicationController
 		redirect_to root_url, notice: 'You have declined the league invitation'
 	end
 
-	def accept
+  def accept # Make sure you can't invite the same user twice. 
 		@invitation = Invitation.find(params[:invitation_id])
 		@user = User.find_by_email(@invitation.recipient_email)
 		if @user # this person is registered

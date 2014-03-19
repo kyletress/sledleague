@@ -17,7 +17,7 @@ Sledleague::Application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   # Devise default URL options
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'winterfell-rails-92923.use1-2.nitrousbox.com/' }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
