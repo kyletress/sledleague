@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+  </head>
+  <body>
+    <h3>Scoring Breakdown</h3>
+    <table>
+      <tr>
+        <th>Athlete</th>
+        <th>Predicted</th>
+        <th>Actual</th>
+        <th>Points</th>
+      </tr>
+      <% @prediction.picks.each do |pick| %>
+        <tr>
+          <td><%= pick.athlete.name %></td>
+          <td><%= pick.position %></td>
+          <td><%= pick.athlete.result(@prediction.match.race.id) %> </td>
+          <td><%= pick.points %></td>
+      </tr>
+      <% end %>
+    </table>
+    
+    <h3>Totals this week</h3>
+    <table>
+      <tr>
+        <th>Team</th>
+        <th>Points</th>
+      </tr>
+      <% @prediction.match.predictions.each do |prediction| %>
+      <tr>
+        <td><%= prediction.user.email %></td>
+        <td><%= prediction.total_points %></td>
+      </tr>
+      <% end %>
+    </table>
+    
+    <h3>Standings</h3>
+
+    <p>See the full results and standings at the site</p>
+  </body>
+</html>

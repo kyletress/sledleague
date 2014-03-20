@@ -14,6 +14,7 @@ class Race < ActiveRecord::Base
   		self.matches.each do |match|
   			match.predictions.each do |prediction|
   				prediction.calculate_points
+          ResultsMailer.results_email(prediction).deliver
   			end
   		end
   	else

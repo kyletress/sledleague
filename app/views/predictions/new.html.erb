@@ -1,8 +1,8 @@
-<h1>New Prediction</h1>
+<h1>Predictions for <%= @match.race.name %></h1>
 
 <%= simple_form_for [@match, @prediction] do |f| %>
 	<%= f.hidden_field :user_id, value: current_user.id %>
-	<h3>Picks</h3>
+	<h3>Your Picks</h3>
 	<ol>
 	<%= f.simple_fields_for :picks do |ff| %>
 	<li>

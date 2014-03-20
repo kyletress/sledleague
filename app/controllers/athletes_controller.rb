@@ -21,11 +21,20 @@ class AthletesController < ApplicationController
 	def create
 		@athlete = Athlete.new(params[:athlete])
 		if @athlete.save
-			redirect_to @athlete
+      redirect_to athletes_path
 		else
 			render 'new'
 		end
 	end
+  
+  def update
+    @athlete = Athlete.find(params[:id])
+    if @athlete.update_attributes(params[:athlete])
+      redirect_to @athlete
+    else
+      render 'edit'
+    end
+  end
   
   private
     

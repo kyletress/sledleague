@@ -16,7 +16,7 @@ class Membership < ActiveRecord::Base
   # TODO - Bolster this model to include team name, team page, and total points
 
   def team_points
-  	self.predictions.sum(:total_points)
+    self.predictions.sum(:total_points) # Belongs to a user. Needs to belong to a member
   end
 
   def team_name
