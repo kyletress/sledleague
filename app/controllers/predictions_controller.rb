@@ -14,10 +14,10 @@ class PredictionsController < ApplicationController
       redirect_to @match, notice: 'Predictions are closed for this race!'
     else
       if @user.is_member(@match.league)
-        @prediction = @match.predictions.build(:user_id => current_user)
+        @prediction = @match.predictions.build(:user_id => current_user, :membership_id => @user.current_team(@match.league).id)
         10.times {|n| @prediction.picks.build(:position => n + 1) }
     	else
-    		redirect_to current_user.leagues.first
+        redirect_to current_user.leagues.first # what if a current user doesn't have a league?
     		flash[:notice] = 'You are not a members of that league!'
     	end
     end
@@ -28,6 +28,16 @@ class PredictionsController < ApplicationController
   end
 
   def edit
+    @prediction = Prediction.find(params[:id])
+  end
+  
+  def update
+    @prediction = Prediction.find(params[:id])
+    if @prediction.update_attributes(params[:prediction])
+      redirect_to match_prediction_path(@match, @prediction), notice: 'Prediction updated'
+    else
+      render 'edit'
+    end
   end
 
   def create
@@ -37,6 +47,12 @@ class PredictionsController < ApplicationController
   	else
   		render 'new'
   	end
+  end
+  
+  def destroy
+    @prediction = Prediction.find(params[:id])
+    @prediction.destroy
+    redirect_to @match
   end
 
   private

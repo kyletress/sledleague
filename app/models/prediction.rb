@@ -1,5 +1,5 @@
 class Prediction < ActiveRecord::Base
-  attr_accessible :match_id, :user_id, :picks_attributes, :total_points
+  attr_accessible :match_id, :user_id, :picks_attributes, :total_points, :membership_id
 
   belongs_to :match
   belongs_to :user

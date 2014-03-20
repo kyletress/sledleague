@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
       return false
     end
   end
+  
+  def current_team(league)
+    Membership.find_by_user_id_and_league_id(self.id, league.id)
+  end
 
   def is_manager(league)
     self == league.manager

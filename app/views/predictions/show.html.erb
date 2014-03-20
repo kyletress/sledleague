@@ -14,6 +14,6 @@
 	<% end %>
 </table>
 
-<%= link_to 'Back to match', match_path(@prediction.match) %> or
-
+<%= link_to 'Back to match', match_path(@prediction.match) %> |
+<%= link_to 'Edit this prediction', edit_match_prediction_path(@prediction.match, @prediction) %> |
 <%= link_to 'Back to league', league_path(@match.league) %>
