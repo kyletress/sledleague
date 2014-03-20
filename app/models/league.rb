@@ -1,5 +1,5 @@
 class League < ActiveRecord::Base
-  attr_accessible :manager_id, :name, :race_ids, :max_teams, :private, :max_matches
+  attr_accessible :manager_id, :name, :race_ids, :max_teams, :private, :max_matches, :description
 
   belongs_to :manager, :class_name => 'User', :foreign_key => 'manager_id'
   has_many :memberships, dependent: :destroy
@@ -12,7 +12,8 @@ class League < ActiveRecord::Base
   validates :manager_id, :name,
   					presence: true
 
-  validates :name, length: { in: 5..30 }
+  validates :name, length: { in: 5..48 }
+  validates :description, length: { maximum: 140 }
   validates :name, uniqueness: true
 
   # TODO - Proper league settings model

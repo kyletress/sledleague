@@ -6,13 +6,13 @@ class Match < ActiveRecord::Base
   has_many :predictions, dependent: :destroy
 
   validates :league_id, :race_id, presence: true
-
+ 
   def predictions_closed
-    cutoff = race.startdate - 1.hour # Hardcoded, but could easily be a league setting
-  	if Time.now >= cutoff
-  		return true
-  	else
-  		return false
-  	end
+    cutoff = TimeDifference.between(race.startdate, Time.now).in_minutes
+    if cutoff < 45 || race.completed
+      return true
+    else
+      return false
+    end
   end
 end

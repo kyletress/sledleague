@@ -3,6 +3,7 @@
 </div>
 <%= simple_form_for @league do |f| %>
 	<%= f.input :name %>
+  <%= f.input :description %>
 	<%= f.input :max_teams, collection: 2..12 %>
 	<%= f.input :max_matches, collection: 1..18 %>
 	<%= f.input :private %>

@@ -2,16 +2,15 @@ class PredictionsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :load_user
   before_filter :load_match
-  # TODO - Only league members can make or see predictions
-  # Maybe make a validation on prediction model instead of checking in controller.
+  # TODO - can only have one prediction per match
 
   def index
     @predictions = @match.predictions
   end
 
   def new
-    if @match.race.completed?
-      redirect_to @match, notice: 'Predictions are closed for this race!'
+    if @match.predictions_closed
+      redirect_to @match, notice: 'Predictions are closed for this race.'
     else
       if @user.is_member(@match.league)
         @prediction = @match.predictions.build(:user_id => current_user)
@@ -22,6 +21,7 @@ class PredictionsController < ApplicationController
     	end
     end
   end
+      
 
   def show
   	@prediction = Prediction.find(params[:id])
@@ -29,6 +29,9 @@ class PredictionsController < ApplicationController
 
   def edit
     @prediction = Prediction.find(params[:id])
+    if @prediction.closed
+      redirect_to match_prediction_path(@match, @prediction), notice: "You can't edit your predictions because this race is complete"
+    end
   end
   
   def update

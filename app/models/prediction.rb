@@ -10,7 +10,6 @@ class Prediction < ActiveRecord::Base
 
   validates_uniqueness_of :user_id, :scope => :match_id
   validates :match_id, :user_id, presence: true
-  # before_create :race_not_completed
 
   # Homemade validation to fix bug in rails uniqueness nested scope validation
 	before_validation do
@@ -26,7 +25,6 @@ class Prediction < ActiveRecord::Base
     score = 0 # full points
     pick_score = 0 # breakdown points
     picks.each do |pick|
-      # BUG? - What if the predicted pick doesn't have a result? Need to account for this.
       x = (pick.athlete.result(pick.prediction.match.race.id) - pick.position).abs
       case x
       when 0
@@ -46,9 +44,17 @@ class Prediction < ActiveRecord::Base
     end
     self.update_attributes(:total_points => score)
   end
+  
+  def closed
+    t = TimeDifference.between(match.race.startdate, Time.now).in_minutes
+    if t < 45 || match.race.completed
+      return true
+    else
+      return false
+    end
+  end
 
   # TODO
-  # URGENT - Predictions should belong to a member, not a user.
   # Can edit predictions until 1 hour before the match begins.
   # Then lock the prediction.
   # Can't make new predictions for completed race.

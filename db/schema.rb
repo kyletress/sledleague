@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140319232039) do
+ActiveRecord::Schema.define(:version => 20140320204212) do
 
   create_table "athletes", :force => true do |t|
     t.string   "name"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20140319232039) do
     t.boolean  "private",     :default => false
     t.integer  "max_teams",   :default => 0,     :null => false
     t.integer  "max_matches", :default => 0,     :null => false
+    t.text     "description"
   end
 
   create_table "matches", :force => true do |t|

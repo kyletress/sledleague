@@ -2,6 +2,7 @@
   <h1>
     <%= @league.name %>
   </h1>
+  <p class="text-muted"><%= @league.description %></p>
   <% if @league.private? %>
     <span class="label label-success">Private</span>
   <% end %>

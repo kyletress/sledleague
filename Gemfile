@@ -6,6 +6,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'figaro'
 gem 'country_select'
+gem 'time_difference'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
