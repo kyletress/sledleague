@@ -14,7 +14,7 @@ class PredictionsController < ApplicationController
       redirect_to @match, notice: 'Predictions are closed for this race!'
     else
       if @user.is_member(@match.league)
-        @prediction = @match.predictions.build(:user_id => current_user, :membership_id => @user.current_team(@match.league).id)
+        @prediction = @match.predictions.build(:user_id => current_user)
         10.times {|n| @prediction.picks.build(:position => n + 1) }
     	else
         redirect_to current_user.leagues.first # what if a current user doesn't have a league?
