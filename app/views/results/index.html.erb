@@ -1,1 +1,23 @@
 <h1>Results of <%= @race.name %></h1>
+
+<%= form_for [@race, @result], remote: true do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+<div class="row">
+  <div class="col-xs-2">
+    <%= f.text_field :position, class: 'form-control', value: @race.results.count + 1 %>
+  </div>
+  <div class="col-xs-10">  
+    <%= f.text_field :athlete_name, class: 'form-control', data: {autocomplete_source: ajax_index_path}, autofocus: true, placeholder: 'athlete name' %>
+  </div>
+  <%= f.submit %>
+</div>  
+<% end %>
+
+	<h3>Results</h3>
+	<table id="results" class="table table-striped table-bordered">
+		<tr>
+			<th>Pos</th>
+			<th>Athlete</th>
+		</tr>
+			<%= render @results %>
+	</table>

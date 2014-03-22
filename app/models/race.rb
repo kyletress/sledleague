@@ -1,5 +1,5 @@
 class Race < ActiveRecord::Base
-  attr_accessible :name, :startdate, :completed, :results_attributes
+  attr_accessible :name, :startdate, :completed
   after_save :go_for_points
 
   has_many :matches, dependent: :destroy

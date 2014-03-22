@@ -1,0 +1,5 @@
+<tr>
+  <td><%= result.position %></td>
+  <td><%= link_to result.athlete.name, result.athlete %> <small><%= link_to 'Destroy', race_result_path(@race, result), method: :delete,
+data: { confirm: 'Are you sure?' }, remote: true %> </small></td>
+</tr>

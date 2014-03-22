@@ -1,0 +1,3 @@
+$('#results').append('<%= j render(@result) %>');
+$("#new_result")[0].reset();
+$('#result_position').val(<%= @result.race.results.count + 1 %>);

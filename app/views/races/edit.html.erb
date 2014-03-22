@@ -10,27 +10,17 @@
   <div class="form-group">
     <%= f.datetime_select :startdate, class: 'form-control' %>
   </div>
-    
-    <label>Results</label>
-    <%= f.fields_for :results do |builder| %>
-      <%= render 'result_fields', f: builder %>     
-    <% end %>
-
-    <%= link_to_add_fields "Add result", f, :results %>
-  
 
   <div class="checkbox">
     <label>
     <%= f.check_box :completed %> Mark this race as completed
     </label>
+    <span class="help-block">Warning! Only mark races as complete if they have full and accurate results.</span>
   </div>
 
   <%= f.submit %>
 
 <% end %>
 
-
-<% if @race.results.blank? %>
-  <%= link_to 'Add Results', '#' %>
-<% end %>
+  <%= link_to 'Add or Edit Results', race_results_path(@race) %>
 
