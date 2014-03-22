@@ -12,8 +12,8 @@ Sledleague::Application.routes.draw do
     end
   end
 
-  resources :races do
-  	resources :results
+  resources :races do 
+    resources :results
   end
 
   resources :athletes
@@ -21,6 +21,7 @@ Sledleague::Application.routes.draw do
     resources :predictions
   end
   resources :memberships
+  resources :ajax
 
   get "pages/home"
   get "pages/about"

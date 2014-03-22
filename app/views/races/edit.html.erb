@@ -1,15 +1,36 @@
 <h1><%= @race.name %></h1>
 
-<%= simple_form_for @race do |f| %>
-	<%= f.input :name %>
-	<%= f.input :startdate %>
-	<%= f.input :completed %>
-	<h3>Results</h3>
-	<%= f.fields_for :results do |builder| %>
-		<%= builder.input :position, collection: 1..12 %>
-		<%= builder.association :athlete %>
-	<% end %>
+<%= form_for @race do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+  
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.datetime_select :startdate, class: 'form-control' %>
+  </div>
+    
+    <label>Results</label>
+    <%= f.fields_for :results do |builder| %>
+      <%= render 'result_fields', f: builder %>     
+    <% end %>
 
+    <%= link_to_add_fields "Add result", f, :results %>
+  
 
-	<%= f.button :submit %>
+  <div class="checkbox">
+    <label>
+    <%= f.check_box :completed %> Mark this race as completed
+    </label>
+  </div>
+
+  <%= f.submit %>
+
 <% end %>
+
+
+<% if @race.results.blank? %>
+  <%= link_to 'Add Results', '#' %>
+<% end %>
+
