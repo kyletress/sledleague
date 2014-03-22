@@ -16,4 +16,5 @@
 
 <%= link_to 'Back to match', match_path(@prediction.match) %> |
 <%= link_to 'Edit this prediction', edit_match_prediction_path(@prediction.match, @prediction) %> |
+<%= link_to 'Destroy this prediction', match_prediction_path(@prediction.match, @prediction), method: :delete, data: {confirm: 'are you sure'} %> |
 <%= link_to 'Back to league', league_path(@match.league) %>

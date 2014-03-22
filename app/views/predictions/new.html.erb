@@ -1,16 +1,15 @@
 <h1>Predictions for <%= @match.race.name %></h1>
 
-<%= simple_form_for [@match, @prediction] do |f| %>
-	<%= f.hidden_field :user_id, value: current_user.id %>
-<%= f.hidden_field :membership_id, value: current_user.current_team(@match.league).id %>
-	<h3>Your Picks</h3>
-	<ol>
-	<%= f.simple_fields_for :picks do |ff| %>
-	<li>
-		<%=  ff.hidden_field :position %>
-		<%= ff.association :athlete %>
-	</li>
-	<% end %>
-</ol>
-	<%= f.button :submit %>
+<%= form_for [@match, @prediction] do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+    <% count = 1 %>
+<%= f.fields_for :picks do |ff| %>
+    <%= ff.hidden_field :position %>
+    <div class="input-group">
+      <span class="input-group-addon"><%= count %>.</span>
+      <%= ff.text_field :athlete_name, class: 'form-control', data: {autocomplete_source: ajax_index_path}, placeholder: 'athlete name' %>
+    </div>
+    <% count = count + 1 %>
+<% end %>
+<%= f.submit %>
 <% end %>

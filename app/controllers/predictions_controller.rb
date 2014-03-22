@@ -22,7 +22,6 @@ class PredictionsController < ApplicationController
     end
   end
       
-
   def show
   	@prediction = Prediction.find(params[:id])
   end
