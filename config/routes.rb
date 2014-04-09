@@ -1,6 +1,7 @@
 Sledleague::Application.routes.draw do
 
   devise_for :users
+  match '/dashboard' => 'users#dashboard', :as => 'dashboard'
 
   resources :leagues do
   	member do
