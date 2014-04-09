@@ -60,9 +60,11 @@
         </div>
       <% end %>
     <% end %>
-
-    <%= yield %>
 	</div><!-- end container-->
-
+  <%= yield %>
+  <footer>
+    <p>Fantasy Sliding &copy; <%= Time.now.year %>. Web software by <a href="http://www.kyletress.com">Kyle Tress</a>. Enjoy the slide.</p> 
+    <p><a href="/privacy">Privacy</a> · <a href="/rules">Rules</a> · <a href="/terms">Terms</a> · <a href="/about">About</a> · <a href="/credits">Credits</a></p>
+  </footer>
 </body>
 </html>
