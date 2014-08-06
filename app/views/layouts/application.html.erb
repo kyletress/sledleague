@@ -12,7 +12,7 @@
 <body>
 
 	<div class="navbar navbar-inverse navbar-static-top sled-nav">
-		<div class="container">
+    <div class="wrapper">
 		<div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       <span class="sr-only">Toggle navigation</span>
@@ -48,8 +48,8 @@
 				<li><%= link_to 'Sign in', new_user_session_path %></li>
 			<% end %>
     </ul>
+   </div>
   </div><!-- /.navbar-collapse -->
-	</div>
 	</div>
 
 	<div class="container">
@@ -62,7 +62,7 @@
       <% end %>
     <% end %>
 	</div><!-- end container-->
-  <%= yield %>
+    <%= yield %>
   <footer>
     <p>Fantasy Sliding &copy; <%= Time.now.year %>. Web software by <a href="http://www.kyletress.com">Kyle Tress</a>. Enjoy the slide.</p> 
     <p><a href="/privacy">Privacy</a> · <a href="/rules">Rules</a> · <a href="/terms">Terms</a> · <a href="/about">About</a> · <a href="/credits">Credits</a></p>

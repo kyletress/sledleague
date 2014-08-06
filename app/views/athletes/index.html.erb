@@ -1,3 +1,4 @@
+<div class="wrapper">
 <h1>Athletes</h1>
 
 <div class="search-form">
@@ -19,3 +20,4 @@
 <% if current_user && current_user.admin? %>
 	<p><%= link_to 'New Athlete', new_athlete_path, class: 'btn btn-default' %></p>
 <% end %>
+</div>

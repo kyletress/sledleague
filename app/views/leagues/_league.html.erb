@@ -5,15 +5,12 @@
 		<% else %>
 			<td><span class="text-muted"><%= league.name %></span></td>
 		<% end %>
-		<td><small><em class="text-muted">Private</em></small></td>
-		<td><small><em class="text-muted">Private</em></td>
 		<td><%= link_to 'Join', join_league_path(league), class: 'btn btn-success btn-xs disabled' %></td>
 	</tr>
 <% else %>
 	<tr>
 		<td><%= link_to league.name, league_path(league) %></td>
 		<td><%= league.manager.email if league.manager %></td>
-		<td>Public</td>
 		<td><%= link_to 'Join', join_league_path(league), class: 'btn btn-success btn-xs' %>
 			<% button_to 'Join', new_membership_path(league: league), method: 'get', class: 'btn btn-success btn-xs' %></td>
 	</tr>

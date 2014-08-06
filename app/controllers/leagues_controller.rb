@@ -47,10 +47,14 @@ class LeaguesController < ApplicationController
 
   def join
     @league = League.find(params[:id])
-    if current_user.memberships.create(:league_id => @league.id)
-      redirect_to @league, notice: 'Welcome to the league'
+    if current_user && current_user.leagues.count < 3
+      if current_user.memberships.create(:league_id => @league.id)
+        redirect_to @league, notice: 'Welcome to the league'
+      else
+        render @league, notice: 'You are already a member'
+      end
     else
-      render @league, notice: 'You are already a member'
+      redirect_to leagues_path, notice: "You have already joined the maximum number of leagues"
     end
   end
 

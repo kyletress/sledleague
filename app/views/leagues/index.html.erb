@@ -1,3 +1,4 @@
+<div class="wrapper">
 <% if notice %>
 <p id="notice"><%= notice %></p>
 <% end %>
@@ -8,10 +9,20 @@
 	<tr>
 		<th>Name</th>
 		<th>Manager</th>
-		<th>Type</th>
 		<th>Join</th>
 	</tr>
 	<%= render @leagues %>
 </table>
+  
+  <ul class="pagination">
+  <li class="disabled"><a href="#">&laquo;</a></li>
+  <li class="active"><a href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">&raquo;</a></li>
+</ul>
 
 <p>Don't see a league you like? <%= link_to 'Create your own', new_league_path %>.</p>
+</div>

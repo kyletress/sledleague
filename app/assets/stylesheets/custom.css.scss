@@ -8,6 +8,11 @@ h1,h2,h3,h4,h5,h6{
   font-family: "Proxima Nova", "Helvetica Neue";
 }
 
+.wrapper{
+  width:90%;
+  margin: 0 auto;
+}
+
 .badge-notification {
 	background-color:#d9534f;
 }
@@ -21,7 +26,7 @@ h1,h2,h3,h4,h5,h6{
   background: #1C344B;
 }
 
-.navbar > .container .navbar-brand {
+.navbar-inverse .navbar-brand {
   text-transform: uppercase;
   color:white;
   font-weight:600;
@@ -106,6 +111,14 @@ footer{
 
 footer a{
   color:#999;
+}
+
+.pagination > li > a, .pagination > li > span {
+  background-color:#f1f1f1;
+}
+
+.pagination>.disabled>span, .pagination>.disabled>a, .pagination>.disabled>a:hover, .pagination>.disabled>a:focus {
+  background-color:#f1f1f1;
 }
 
 @media screen and (min-width: 768px) {
